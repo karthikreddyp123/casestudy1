@@ -1,0 +1,65 @@
+<div class='card' [style.width.%]='width' [style.margin-left.%]='marginLeft'>
+    <div class='card-header'>
+        {{cardTitle}}
+        <button *ngIf='editMode' type="button" class="close" aria-label="Close" (click)='onCancel()'>
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class='card-body'>
+        <form #form="ngForm" (submit)='onSubmit(form)'>
+            <div class='form-group'>
+                <div class='row'>
+                    <div class='col-md-4 col-form-label'>
+                        <label for='username'>Username:</label>
+                    </div>
+                    <div class='col-md-6'>
+                        <input id='username' name='username' class='form-control'
+                            [(ngModel)]='registrationDetails.username' required #usernameField='ngModel'
+                            [class.field-error]='form.submitted && usernameField.invalid'>
+                        <div [hidden]="!form.submitted || usernameField.valid" class='alert alert-danger'>
+                            Enter username
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='form-group' *ngIf='!editMode'>
+                <div class='row'>
+                    <div class='col-md-4 col-form-label'>
+                        <label for='password'>Password:</label>
+                    </div>
+                    <div class='col-md-6'>
+                        <input id='password' name='password' class='form-control'
+                            [(ngModel)]='registrationDetails.password' required #passwordField='ngModel'
+                            [class.field-error]='form.submitted && passwordField.invalid'>
+                        <div [hidden]="!form.submitted || passwordField.valid" class='alert alert-danger'>
+                            Enter password
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='form-group'>
+                <div class='row'>
+                    <div class='col-md-4 col-form-label'>
+                        <label for='role'>Role:</label>
+                    </div>
+                    <div class='col-md-6'>
+                        <select class="form-control" id="role" name="role" [(ngModel)]='registrationDetails.role'>
+                            <option *ngFor='let role of roles'>{{role}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div [hidden]='!registrationError' class='alert alert-danger'>
+                {{registrationErrorMessage}}
+            </div>
+            <div class='form-group'>
+                <button [disabled]='loading' class='uui-button lime-green mr-2'>
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    {{btnText}}
+                </button>
+                <a *ngIf='!editMode' routerLink="/login" class="uui-button blue">Login</a>
+                <button *ngIf='editMode' class='uui-button blue' (click)='onCancel()'>Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

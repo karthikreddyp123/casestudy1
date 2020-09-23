@@ -1,0 +1,48 @@
+<div class='container'>
+    <div class="card-columns d-flex justify-content-center">
+        
+        <div class='card col-md-8'>
+            <div class='card-block'>
+                <div class='card-header'>
+                    {{pageTitle}}
+                </div>
+                <div class='card-body'>
+                    <div class='row'>
+                        <div class='col-md-2 mr-1 col-form-label'>
+                            Filter By:
+                        </div>
+                        <div class='col-md-4 pb-3'>
+                            <input class ='form-control' #filterbox placeholder='Search..' type="text" [(ngModel)]='listFilter' />
+                        </div>
+                    </div>
+                    <div class='row'>
+                        <div class='table-responsive'>
+                            <table class='table' *ngIf='users && users.length'>
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Username</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor='let user of filteredUsers'>
+                                        <td>{{filteredUsers.indexOf(user) + 1}}</td>
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.role}}</td>
+                                        <td><button class='uui-button small mr-1' (click)='onEdit(user)'>Edit</button>
+                                        <button class='uui-button small' (click)='onDelete(user)'>Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='col-md-6' *ngIf='showForm'>
+            <app-registration [registrationDetails]='userToBeUptaded' (closeCard)='onCancel($event)'></app-registration>
+        </div>
+    </div>
+</div>
