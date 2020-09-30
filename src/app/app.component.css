@@ -40,3 +40,6 @@
           transform: rotate(359deg);
       }
   }
+  body{
+      background-color: #B5E6FF;
+  }

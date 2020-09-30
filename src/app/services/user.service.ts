@@ -55,4 +55,7 @@ export class UserService {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
+  changePassword(passwordChangeDetails: LoginDetails): Observable<any>{
+    return this.http.post('http://localhost:4000/users/changepassword', passwordChangeDetails);
+  }
 }

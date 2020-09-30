@@ -49,7 +49,12 @@ export class RegistrationComponent implements OnInit {
   }
   onRegistrationError(errorResponse): void {
     console.log(errorResponse.status);
-    this.registrationErrorMessage = 'Sorry.... Something went wrong!!!!';
+    if (errorResponse.status === 400) {
+      this.registrationErrorMessage = 'Username already exists!!!!';
+    }
+    else {
+      this.registrationErrorMessage = 'Sorry.... Something went wrong!!!!';
+    }
     this.registrationError = true;
     this.loading = false;
   }

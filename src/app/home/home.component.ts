@@ -1,3 +1,5 @@
+import { UserService } from './../services/user.service';
+import { User } from './../login/user';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  currentUser: User;
+  constructor(private userService: UserService) {
+    this.userService.currentUser.subscribe(x => this.currentUser = x);
+  }
 
   ngOnInit(): void {
   }

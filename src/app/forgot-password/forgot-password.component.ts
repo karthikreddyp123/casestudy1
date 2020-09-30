@@ -1,3 +1,7 @@
+import { Router } from '@angular/router';
+import { UserService } from './../services/user.service';
+import { LoginDetails } from './../login/login-details';
+import { NgForm } from '@angular/forms';
 import { ForgotPasswordService } from './../services/forgot-password.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,13 +12,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
 
+  forgotPasswordDetails: LoginDetails = {
+    username: null,
+    password: null
+  };
   username: string;
   loading = false;
+  changePasswordLoading = false;
   mailSent = false;
   passwordMatch = false;
   generatedPassword: string;
   newPassword: string;
-  constructor(private forgotPasswordService: ForgotPasswordService) { }
+  errorMessage: string;
+  error = false;
+  constructor(private forgotPasswordService: ForgotPasswordService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     console.log('In Forgot');
@@ -40,8 +51,28 @@ export class ForgotPasswordComponent implements OnInit {
       this.passwordMatch = true;
       console.log('matched');
     }
-    else{
+    else {
+      this.passwordMatch = false;
       console.log('Not matched');
     }
+  }
+  onSubmit(form: NgForm): void {
+    if (form.valid) {
+      this.changePasswordLoading = true;
+      this.forgotPasswordDetails = {
+        username: this.username,
+        password: this.newPassword
+      };
+      this.userService.changePassword(this.forgotPasswordDetails).subscribe(
+        result => this.router.navigate(['/login']),
+        error => this.onPasswordChangeError(error)
+      );
+    }
+  }
+  onPasswordChangeError(errorResponse): void {
+    console.log(errorResponse.status);
+    this.errorMessage = 'Sorry.... Something went wrong!!!!';
+    this.error = true;
+    this.changePasswordLoading = false;
   }
 }
