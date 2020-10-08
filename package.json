@@ -22,6 +22,8 @@
     "@auth0/angular-jwt": "^5.0.1",
     "@types/bootbox": "^5.2.1",
     "@types/jwt-decode": "^2.2.1",
+    "alertify.js": "^1.0.12",
+    "alertifyjs": "^1.13.1",
     "bootbox": "^5.4.0",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",

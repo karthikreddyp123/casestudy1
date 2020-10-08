@@ -21,13 +21,15 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/assets/images/no-photo.png"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/uui-framework/less/uui-all.less",
-              "node_modules/uui-framework/fonts/font-awesome/css/font-awesome.min.css"
+              "node_modules/uui-framework/fonts/font-awesome/css/font-awesome.min.css",
+              "node_modules/alertify.js/dist/css/alertify.css"
             ],
             "scripts": [
               "node_modules/bootbox/dist/bootbox.min.js",
@@ -35,7 +37,8 @@
               "node_modules/uui-framework/bootstrap/js/bootstrap.min.js",
               "node_modules/uui-framework/js/uui/uui-core.js",
               "node_modules/uui-framework/js/lib/components/bootstrap3-typeahead.min.js",
-              "node_modules/uui-framework/js/uui/uui-autocomplete.js"
+              "node_modules/uui-framework/js/uui/uui-autocomplete.js",
+              "node_modules/alertify.js/dist/js/alertify.js"
             ]
           },
           "configurations": {
@@ -94,17 +97,13 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+            
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/bootstrap.min.js",
-              "node_modules/bootbox/dist/bootbox.min.js"
+             
             ]
           }
         },

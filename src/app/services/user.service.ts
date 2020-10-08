@@ -1,9 +1,9 @@
-import { User } from './../login/user';
-import { LoginDetails } from './../login/login-details';
+import { User } from './../auth/login/user';
+import { LoginDetails } from './../auth/login/login-details';
 import { BehaviorSubject, Observable, pipe } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { RegistrationDetails } from '../registration/registration-details';
+import { RegistrationDetails } from '../auth/registration/registration-details';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -15,7 +15,7 @@ export class UserService {
   public currentUser: Observable<User>;
   user: User;
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -42,7 +42,7 @@ export class UserService {
           role: decodedToken.role,
           token: token.replace('Bearer ', '')
         });
-        localStorage.setItem('currentUser', currentUser);
+        sessionStorage.setItem('currentUser', currentUser);
       }));
   }
   getAllUsers(): Observable<any> {
@@ -52,7 +52,7 @@ export class UserService {
     return this.http.delete('http://localhost:4000/users/' + id);
   }
   logout(): void {
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
   changePassword(passwordChangeDetails: LoginDetails): Observable<any>{
